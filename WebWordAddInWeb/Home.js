@@ -349,7 +349,7 @@ function Bullet_New() {
 
     Word.run(function (context) {
         context.document.body.insertParagraph(
-            "Mohammed1 Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
+            "Mohammed3 Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
             "Start"
         );
         let paragraphs = context.document.body.paragraphs;
@@ -357,7 +357,7 @@ function Bullet_New() {
         return context.sync().then(function () {
             let list = paragraphs.items[1].startNewList();
             // insert the list at the start location
-            list.insertParagraph("My 0 item at start2", Word.InsertLocation.start);
+            list.insertParagraph("My 0 item at start3", Word.InsertLocation.start);
 
         })
         //return context.sync();
