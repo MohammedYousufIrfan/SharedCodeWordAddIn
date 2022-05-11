@@ -348,7 +348,7 @@ function Bullet_New() {
 
     Word.run(function (context) {
         context.document.body.insertParagraph(
-            "Mohammed Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
+            "Mohammed1 Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
             "Start"
         );
         let paragraphs = context.document.body.paragraphs;
@@ -356,12 +356,20 @@ function Bullet_New() {
         return context.sync().then(function () {
             let list = paragraphs.items[1].startNewList();
             // insert the list at the start location
-            list.insertParagraph("My 0 item at start1", Word.InsertLocation.start);
+            list.insertParagraph("My 0 item at start2", Word.InsertLocation.start);
 
-            list.setLevelBullet(0, Word.ListBullet.diamonds);
+        }).then(context.sync).then(function () {
+            let wordLists = context.document.body.lists;
+
+            // grab the first list
+            let firstList = wordLists.getFirstOrNullObject();
+
+            // set the bullet design for the first level
+            firstList.setLevelBullet(0, Word.ListBullet.checkmark);
 
             // set indent level for the first level to 50 points, 20 points for images
-            list.setLevelIndents(0, 50, 20);
+            firstList.setLevelIndents(0, 50, 20);
+
         })
         //return context.sync();
     }).catch(function (error) {
