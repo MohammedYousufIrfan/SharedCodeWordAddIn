@@ -358,7 +358,7 @@ function Bullet_New() {
             // insert the list at the start location
             list.insertParagraph("My 0 item at start1", Word.InsertLocation.start);
 
-            list.setLevelBullet(0, Word.ListBullet.hollow);
+            list.setLevelBullet(0, Word.ListBullet.diamonds);
 
             // set indent level for the first level to 50 points, 20 points for images
             list.setLevelIndents(0, 50, 20);
