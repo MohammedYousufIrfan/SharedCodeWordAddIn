@@ -359,18 +359,6 @@ function Bullet_New() {
             // insert the list at the start location
             list.insertParagraph("My 0 item at start2", Word.InsertLocation.start);
 
-        }).then(context.sync).then(function () {
-            let wordLists = context.document.body.lists;
-
-            // grab the first list
-            let firstList = wordLists.getFirstOrNullObject();
-
-            // set the bullet design for the first level
-            firstList.setLevelBullet(0, Word.ListBullet.checkmark);
-
-            // set indent level for the first level to 50 points, 20 points for images
-            firstList.setLevelIndents(0, 50, 20);
-
         })
         //return context.sync();
     }).catch(function (error) {
