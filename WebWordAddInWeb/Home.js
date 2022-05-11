@@ -424,24 +424,30 @@ function Bullet_New() {
     Word.run(function (context) {
         let paragraphs = context.document.body.paragraphs;
         paragraphs.load("items");
-        var secondParagraph;
-        return context.sync().then(function () {
-            if (paragraphs.items.length > 1) {
-                secondParagraph = paragraphs.items[1];
-                secondParagraph.load("font");
-            }
-            let list = paragraphs.items[1].startNewList();
+        let list = paragraphs.items[1].startNewList();
 
-            // insert the list at the start location
-             list.insertParagraph("My 0 item at start", Word.InsertLocation.start)
-        }).then(context.sync).then(function () {
-            secondParagraph.font.set({
-                name: "Courier New",
-                bold: true,
-                size: 30,
-            });
-             list.insertParagraph("My 0 item at start", Word.InsertLocation.start)
-        })
+        // insert the list at the start location
+        let myFirstItem = list.insertParagraph("Mohammed Yousuf", Word.InsertLocation.start)
+
+        //var secondParagraph;
+        //return context.sync().then(function () {
+        //    if (paragraphs.items.length > 1) {
+        //        secondParagraph = paragraphs.items[1];
+        //        secondParagraph.load("font");
+        //    }
+        //    let list = paragraphs.items[1].startNewList();
+
+        //    // insert the list at the start location
+        //     list.insertParagraph("My 0 item at start", Word.InsertLocation.start)
+        //}).then(context.sync).then(function () {
+        //    secondParagraph.font.set({
+        //        name: "Courier New",
+        //        bold: true,
+        //        size: 30,
+        //    });
+        //     list.insertParagraph("My 0 item at start", Word.InsertLocation.start)
+        //})
+        return context.sync();
     }).catch(function (error) {
         console.log('Error: ' + JSON.stringify(error));
         if (error instanceof OfficeExtension.Error) {
