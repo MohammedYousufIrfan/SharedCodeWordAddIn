@@ -425,7 +425,7 @@ function Bullet_New() {
         let paragraphs = context.document.body.paragraphs;
         paragraphs.load("items");
         let list = paragraphs.items[1].startNewList();
-
+         context.sync();
         // insert the list at the start location
         let myFirstItem = list.insertParagraph("Mohammed Yousuf", Word.InsertLocation.start)
 
