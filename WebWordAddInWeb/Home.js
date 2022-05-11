@@ -142,8 +142,6 @@ function GetWordCount() {
         });
     });
 }
-
-
 // #endregion APi Interaction
 
 
@@ -346,42 +344,6 @@ function ReplaceContentInControl_New() {
         }
     });
 }
-
-//function Bullet_New() {
-
-//    Word.run(function (context) {
-//        //context.document.body.insertParagraph(
-//        //    "Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
-//        //    "Start"
-//        //);
-//        //context.document.body.lists.items.AddParagraph("kkkknknkn");
-//       // let para = context.document.body.paragraphs;
-
-//       // //console.log('Enter hogaya');
-//       // para.load('items');
-//       //// await context.sync();
-//       // let list = para.items[1].startNewList();
-//       // let myfirstlistitem = list.insertParagraph("ergesgs", Word.InsertLocation.start)
-//        // grab the lists collection
-//        let wordLists = context.document.body.lists
-
-//        // grab the first list
-//        let firstList = wordLists.getFirstOrNullObject();
-
-//        // set the bullet design for the first level
-//        firstList.setLevelBullet(0, Word.ListBullet.hollow);
-
-//        // set indent level for the first level to 50 points, 20 points for images
-//        firstList.setLevelIndents(0, 50, 20);
-//        return context.sync();
-//    }).catch(function (error) {
-//        console.log('Error: ' + JSON.stringify(error));
-//        if (error instanceof OfficeExtension.Error) {
-//            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-//        }
-//    });
-//}
-
 // #endregion 
 
 // #region Api 1.1 Methods
