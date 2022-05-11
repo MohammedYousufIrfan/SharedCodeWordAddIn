@@ -378,7 +378,7 @@ function BulletFormat_New() {
             let firstList = wordLists.getFirstOrNullObject();
 
             // set the bullet design for the first level
-            firstList.setLevelBullet(0, Word.ListBullet.checkmark);
+            firstList.setLevelBullet(0, Word.ListBullet.diamonds);
 
             // set indent level for the first level to 50 points, 20 points for images
             firstList.setLevelIndents(0, 50, 20);
