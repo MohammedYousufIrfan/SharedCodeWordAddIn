@@ -310,9 +310,10 @@ function InsertTable_New() {
         }
     });
 }
-function Bullet_New() {
+function Bullet_New1() {
 
     Word.run(function (context) {
+
         let paragraphs = context.document.body.paragraphs;
         paragraphs.load("items");
 
@@ -333,6 +334,30 @@ function Bullet_New() {
                 size: 30,
             });
              list.insertParagraph("23", Word.InsertLocation.start)
+        })
+        //return context.sync();
+    }).catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+}
+
+function Bullet_New() {
+
+    Word.run(function (context) {
+        
+        context.document.body.insertParagraph(
+            "Mohammed Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
+            "Start"
+        );
+        let paragraphs = context.document.body.paragraphs;
+        paragraphs.load("items");
+        return context.sync().then(function () {
+            let list = paragraphs.items[1].startNewList();
+            // insert the list at the start location
+            list.insertParagraph("My 0 item at start1", Word.InsertLocation.start)
         })
         //return context.sync();
     }).catch(function (error) {
