@@ -31,6 +31,7 @@ const base64Image = "iVBORw0KGgoAAAANSUhEUgAAAZAAAAEFCAIAAABCdiZrAAAACXBIWXMAAAs
                 $("#btnReplaceContentControl").click(ReplaceContentInControl_New);
                 $("#btnAddBullet").click(Bullet_New);
                 $("#btnCheckmark").click(BulletFormat_New);
+                $("#btnCheckmark1").click(BulletFormat_New1);
                 $("#OfficeVersion").html("This code is using word 2019 or later");
 
                 // #endregion 
@@ -382,6 +383,33 @@ function BulletFormat_New() {
 
             // set indent level for the first level to 50 points, 20 points for images
             firstList.setLevelIndents(0, 50, 20);
+        })
+    }).catch(function (error) {
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
+    });
+}
+function BulletFormat_New1() {
+
+    Word.run(function (context) {
+        let wordLists = context.document.body.getSelection();
+        wordLists.load('items');
+
+        return context.sync().then(function () {
+            for (var i = 0; i < wordLists.items.length; i++) {
+                // do something with paragraph (paragraphs.items[i])
+                let firstList = wordLists(wordLists.items[i]);
+
+                // set the bullet design for the first level
+                firstList.setLevelBullet(0, Word.ListBullet.diamonds);
+
+                // set indent level for the first level to 50 points, 20 points for images
+                firstList.setLevelIndents(0, 50, 20);
+            }
+
+           
         })
     }).catch(function (error) {
         console.log('Error: ' + JSON.stringify(error));
