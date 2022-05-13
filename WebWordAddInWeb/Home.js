@@ -303,8 +303,11 @@ function InsertTable_New() {
         ];
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
         blankParagraph.insertTable(3, 3, "After", tableData);
-        blankParagraph.styleBuiltIn = Word.Style.toc1;
-        return context.sync();
+        
+        //return context.sync();
+        return context.sync().then(function () {
+            blankParagraph.styleBuiltIn = Word.Style.tocHeading;
+        })
     }).catch(function (error) {
         console.log('Error: ' + JSON.stringify(error));
         if (error instanceof OfficeExtension.Error) {
