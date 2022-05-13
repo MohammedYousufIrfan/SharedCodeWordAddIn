@@ -299,14 +299,15 @@ function InsertTable_New() {
         const tableData = [
             ["Name", "ID", "Birth City"],
             ["Bob", "434", "Hyderabad"],
-            ["Sue", "719", "Hyd"],
+            ["Sue", "719", "Hyd5"],
         ];
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
-        blankParagraph.insertTable(3, 3, "After", tableData);
+       
         
         //return context.sync();
         return context.sync().then(function () {
             blankParagraph.styleBuiltIn = Word.Style.tocHeading;
+            blankParagraph.insertTable(3, 3, "After", tableData);
         })
     }).catch(function (error) {
         console.log('Error: ' + JSON.stringify(error));
