@@ -298,12 +298,12 @@ function InsertTable_New() {
     Word.run(function (context) {
         const tableData = [
             ["Name", "ID", "Birth City"],
-            ["Bob", "434", "Chicago"],
-            ["Sue", "719", "Havana"],
+            ["Bob", "434", "Hyderabad"],
+            ["Sue", "719", "Hyd"],
         ];
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
         blankParagraph.insertTable(3, 3, "After", tableData);
-
+        blankParagraph.styleBuiltIn = Word.Style.toc1;
         return context.sync();
     }).catch(function (error) {
         console.log('Error: ' + JSON.stringify(error));
