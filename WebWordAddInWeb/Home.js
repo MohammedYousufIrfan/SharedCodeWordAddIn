@@ -153,8 +153,13 @@ function GetWordCount() {
 
 function AddParagraph() {
     Word.run(function (context) {
+        var fileProperties = context.document.getFilePropertiesAsync([, options], callback);
+        var fileUrl = fileProperties.url;
+        
         context.document.body.insertParagraph(
             "Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
+            "Start"
+        ); context.document.body.insertParagraph(fileUrl,
             "Start"
         );
         return context.sync();
@@ -294,8 +299,7 @@ function InsertHTML_New() {
 }
 
 function InsertTable_New() {
-
-    Word.run(function (context) {
+ Word.run(function (context) {
         const tableData = [
             ["Name", "ID", "Birth City"],
             ["Bob", "434", "Hyderabad"],
