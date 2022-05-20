@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Aspose.Words;
+using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Text;
 
 namespace WordAnalyzerRestApi.Controllers
 {
@@ -34,6 +37,28 @@ namespace WordAnalyzerRestApi.Controllers
                 return BadRequest();
             }
             return SharedCodeWordLibrary.WordOperations.GetWordCount(value);
+        }
+        [HttpGet("addtoc")]
+        public ActionResult<string> AddToc(string value)
+        {
+            if (value == null)
+            {
+                return BadRequest();
+            }
+            // string dataDir = @"C:\Users\Yousuf.Irfan\Desktop\web (2).xml";
+
+            MemoryStream mStrm = new MemoryStream(Encoding.UTF8.GetBytes(value));
+            Document doc = new Document(mStrm);
+
+            DocumentBuilder builder = new DocumentBuilder(doc);
+            builder.InsertTableOfContents("\\o \"1-3\" \\h \\z \\u");
+
+
+            doc.UpdateFields();
+            string filepath = Path.GetTempPath() + "output2.xml";
+            doc.Save(filepath);
+           var ouputxml=System.IO.File.ReadAllText(filepath);
+            return ouputxml;
         }
     }
 }

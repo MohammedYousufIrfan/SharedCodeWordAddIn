@@ -69,6 +69,7 @@ const base64Image = "iVBORw0KGgoAAAANSUhEUgAAAZAAAAEFCAIAAABCdiZrAAAACXBIWXMAAAs
             $("#btnShowUnicode").click(GetUnicode);
             $("#btnShowCharCount").click(GetCharCount);
             $("#btnShowWordCount").click(GetWordCount);
+            $("#btnAddToc").click(AddToc);
 
             // #endregion
         });
@@ -141,6 +142,31 @@ function GetWordCount() {
                     $("#txtWordCountResult").html("error occurred in ajax call.");
                 }
             });
+        });
+    });
+}
+function AddToc() {
+    Word.run(function (context) {
+        // Create a proxy object for the document body.
+        var body = context.document.body;
+
+        // Queue a commmand to get the OOXML contents of the body.
+        var bodyOOXML = body.getOoxml();
+
+        return context.sync().then(function () {
+            var outputxml = "";
+            const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + bodyOOXML.value;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    body.insertOoxml(data);
+                },
+                error: function (data) {
+                    $("#txtWordCountResult").html("error occurred in ajax call.");
+                }
+            });
+
         });
     });
 }
