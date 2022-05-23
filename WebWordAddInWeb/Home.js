@@ -157,7 +157,7 @@ function AddToc() {
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            $("#txtWordCountResult").html(bodyHTML.value);
+            $("#txtWordCountResult").html("Hi working"+bodyHTML.value);
             console.log("Body HTML contents: " + bodyHTML.value);
         });
     })
