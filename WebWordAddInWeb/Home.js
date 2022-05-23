@@ -160,7 +160,7 @@ function AddToc() {
             console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc"  ;
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: url,
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ value: bodyHTML.value }),

@@ -38,7 +38,7 @@ namespace WordAnalyzerRestApi.Controllers
             }
             return SharedCodeWordLibrary.WordOperations.GetWordCount(value);
         }
-        [HttpGet("addtoc")]
+        [HttpPost("addtoc")]
         public ActionResult<string> AddToc(string value)
         {
             if (value == null)
