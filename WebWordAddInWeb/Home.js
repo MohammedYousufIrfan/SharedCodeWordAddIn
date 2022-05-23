@@ -172,6 +172,18 @@ function AddToc() {
             });
 
         });
+    }).catch(function (error) {
+
+        // Clear the text area just so we don't give you the impression that there's
+        // valid OOXML waiting to be inserted... 
+        textArea.value = "";
+        // Let the user see the error.
+        report.innerText = error.message;
+        $("#txtWordCountResult").html(error.message);
+        console.log('Error: ' + JSON.stringify(error));
+        if (error instanceof OfficeExtension.Error) {
+            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+        }
     });
 }
 // #endregion APi Interaction
