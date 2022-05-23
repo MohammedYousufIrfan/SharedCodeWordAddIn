@@ -123,6 +123,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Contoso.DesktopFunctionFile.Url" DefaultValue="~remoteAppUrl/Functions/FunctionFile.html" />
+        <!--<bt:Url id="Contoso.Taskpane.Url" DefaultValue="~remoteAppUrl/Home.html" />-->
         <bt:Url id="Contoso.Taskpane.Url" DefaultValue="https://mohammedyousufirfan.github.io/SharedCodeWordAddIn/WebWordAddInWeb/Home.html" />
         <bt:Url id="Contoso.GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
       </bt:Urls>

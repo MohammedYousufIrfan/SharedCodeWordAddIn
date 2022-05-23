@@ -152,13 +152,17 @@ function AddToc() {
 
         // Queue a commmand to get the OOXML contents of the body.
         var bodyOOXML = body.getOoxml();
-        var outputxml = bodyOOXML.value;
+    
         return context.sync().then(function () {
-           
-            const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + outputxml;
+            var outputxml =bodyOOXML.value;
+           // const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + outputxml;
+            const url = "https://localhost:44324/wordanalyzer/addtoc";
             $.ajax({
                 type: "GET",
                 url: url,
+                data: {
+                    "value" : outputxml
+                },
                 success: function (data) {
                     body.insertOoxml(data);
                 },
