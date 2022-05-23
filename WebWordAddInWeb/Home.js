@@ -169,13 +169,21 @@ function AddToc() {
                     outputxml = JSON.stringify(dat.XmlData);
                     $("#txtWordCountResult").html("inside");
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                    setOOXML_newAPI(outputxml);
+                   // setOOXML_newAPI(outputxml);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
 
+        }).then(function () {
+            if (currentOOXML != "") {
+                context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                $("#txtCharCountResult").html(" set hogaya");
+            }
+            else {
+                $("#txtCharCountResult").html(" nai set hogaya");
+            }
         });
     })
         .catch(function (error) {
