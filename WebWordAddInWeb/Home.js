@@ -166,14 +166,15 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                     outputxml = JSON.stringify(dat.XmlData);
-                    $("#txtWordCountResult").html("isidesetkarre");
+                    outputxml = JSON.stringify(dat.XmlData);
+                    $("#txtWordCountResult").html("inside");
+                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
-            body.insertOoxml(outputxml, Word.InsertLocation.replace);
+           
         }).then(context.sync).then(function () {
             $("#txtCharCountResult").html("set hogaya");
         })
