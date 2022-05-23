@@ -39,15 +39,15 @@ namespace WordAnalyzerRestApi.Controllers
             return SharedCodeWordLibrary.WordOperations.GetWordCount(value);
         }
         [HttpPost("addtoc")]
-        public ActionResult<string> AddToc(string value)
+        public ActionResult<string> AddToc([FromBody] WordOOXML wordOOXML)
         {
-            if (value == null)
+            if (wordOOXML.XmlData == null)
             {
                 return BadRequest();
             }
             // string dataDir = @"C:\Users\Yousuf.Irfan\Desktop\web (2).xml";
 
-            MemoryStream mStrm = new MemoryStream(Encoding.UTF8.GetBytes(value));
+            MemoryStream mStrm = new MemoryStream(Encoding.UTF8.GetBytes(wordOOXML.XmlData));
             Document doc = new Document(mStrm);
 
             DocumentBuilder builder = new DocumentBuilder(doc);
@@ -60,5 +60,9 @@ namespace WordAnalyzerRestApi.Controllers
            var ouputxml=System.IO.File.ReadAllText(filepath);
             return ouputxml;
         }
+    }
+    public class WordOOXML
+    {
+        public string XmlData { get; set; }
     }
 }

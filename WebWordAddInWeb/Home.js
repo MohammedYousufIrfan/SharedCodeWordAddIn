@@ -152,22 +152,24 @@ function AddToc() {
         var body = context.document.body;
 
         // Queue a commmand to get the HTML contents of the body.
-        var bodyHTML = body.getOoxml();
-
+       var bodyOOXML = body.getOoxml();
+      
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            console.log("Body HTML contents: " + bodyHTML.value);
-            const url = "https://localhost:44324/wordanalyzer/addtoc"  ;
+           // console.log("Body HTML contents: " + bodyHTML.value);
+            const url = "https://localhost:44324/wordanalyzer/addtoc";
+            var data = { XmlData: bodyOOXML.value };
             $.ajax({
                 type: "POST",
                 url: url,
+                data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({ value: bodyHTML.value }),
-                success: function (data) {
+                dataType: "json",
+                success: function (dat) {
                     $("#txtWordCountResult").html("Inside hun");
                 },
-                error: function (data) {
+                error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call.");
                 }
             });
