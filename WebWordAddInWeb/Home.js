@@ -154,6 +154,7 @@ function AddToc() {
        var bodyOOXML = body.getOoxml();
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
+        var otxml;
         return context.sync().then(function () {
            // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
@@ -165,14 +166,17 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                    body.insertOoxml(dat, Word.InsertLocation.replace);
-                    $("#txtWordCountResult").html("Inside hun");
+                    var outputxml = JSON.stringify(dat.XmlData);
+                    $("#txtWordCountResult").html(outputxml);
+                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 },
                 error: function (dat) {
-                    $("#txtWordCountResult").html("error occurred in ajax call.");
+                    $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
-        });
+        }).then(context.sync).then(function () {
+            
+        })
     })
         .catch(function (error) {
             console.log("Error: " + JSON.stringify(error));

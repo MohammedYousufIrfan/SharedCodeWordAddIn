@@ -39,7 +39,7 @@ namespace WordAnalyzerRestApi.Controllers
             return SharedCodeWordLibrary.WordOperations.GetWordCount(value);
         }
         [HttpPost("addtoc")]
-        public ActionResult<string> AddToc([FromBody] WordOOXML wordOOXML)
+        public ActionResult<WordOOXML> AddToc([FromBody] WordOOXML wordOOXML)
         {
             if (wordOOXML.XmlData == null)
             {
@@ -57,8 +57,8 @@ namespace WordAnalyzerRestApi.Controllers
             doc.UpdateFields();
             string filepath = Path.GetTempPath() + "output2.xml";
             doc.Save(filepath);
-           var ouputxml=System.IO.File.ReadAllText(filepath);
-            return ouputxml;
+            wordOOXML.XmlData = System.IO.File.ReadAllText(filepath);
+            return wordOOXML;
         }
     }
     public class WordOOXML
