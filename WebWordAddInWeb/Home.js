@@ -147,45 +147,69 @@ function GetWordCount() {
 }
 function AddToc() {
     Word.run(function (context) {
+
         // Create a proxy object for the document body.
         var body = context.document.body;
 
-        // Queue a commmand to get the OOXML contents of the body.
-        var bodyOOXML = body.getOoxml();
-      //  await context.sync();
+        // Queue a commmand to get the HTML contents of the body.
+        var bodyHTML = body.getOoxml();
+
+        // Synchronize the document state by executing the queued commands,
+        // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            var outputxml =bodyOOXML.value;
-           // const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + outputxml;
-            const url = "https://localhost:44324/wordanalyzer/addtoc";
-            $.ajax({
-                type: "GET",
-                url: url,
-                data: {
-                    "value" : outputxml
-                },
-                success: function (data) {
-                    body.insertOoxml(data);
-                },
-                error: function (data) {
-                    $("#txtWordCountResult").html("error occurred in ajax call.");
-                }
-            });
-
+            $("#txtWordCountResult").html(bodyHTML.value);
+            console.log("Body HTML contents: " + bodyHTML.value);
         });
-    }).catch(function (error) {
-
-        // Clear the text area just so we don't give you the impression that there's
-        // valid OOXML waiting to be inserted... 
-        textArea.value = "";
-        // Let the user see the error.
-        report.innerText = error.message;
-        $("#txtWordCountResult").html(error.message);
-        console.log('Error: ' + JSON.stringify(error));
-        if (error instanceof OfficeExtension.Error) {
-            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
-        }
-    });
+    })
+        .catch(function (error) {
+            console.log("Error: " + JSON.stringify(error));
+            if (error instanceof OfficeExtension.Error) {
+                $("#txtWordCountResult").html(JSON.stringify(error.debugInfo));
+                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+            }
+        });
 }
+//function AddToc() {
+//    Word.run(function (context) {
+//        // Create a proxy object for the document body.
+//        var body = context.document.body;
+
+//        // Queue a commmand to get the OOXML contents of the body.
+//        var bodyOOXML = body.getOoxml();
+//        //  await context.sync();
+//        return context.sync().then(function () {
+//            var outputxml = bodyOOXML.value;
+//            // const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + outputxml;
+//            const url = "https://localhost:44324/wordanalyzer/addtoc";
+//            $.ajax({
+//                type: "GET",
+//                url: url,
+//                data: {
+//                    "value": outputxml
+//                },
+//                success: function (data) {
+//                    body.insertOoxml(data);
+//                },
+//                error: function (data) {
+//                    $("#txtWordCountResult").html("error occurred in ajax call.");
+//                }
+//            });
+
+//        });
+//    }).catch(function (error) {
+
+//        // Clear the text area just so we don't give you the impression that there's
+//        // valid OOXML waiting to be inserted... 
+//        textArea.value = "";
+//        // Let the user see the error.
+//        report.innerText = error.message;
+//        $("#txtWordCountResult").html(error.message);
+//        console.log('Error: ' + JSON.stringify(error));
+//        if (error instanceof OfficeExtension.Error) {
+//            console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+//        }
+//    });
+//}
 // #endregion APi Interaction
 
 
