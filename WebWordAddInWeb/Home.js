@@ -157,12 +157,13 @@ function AddToc() {
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
-            $("#txtWordCountResult").html("Hi working"+bodyHTML.value);
             console.log("Body HTML contents: " + bodyHTML.value);
-            const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + bodyHTML.value;
+            const url = "https://localhost:44324/wordanalyzer/addtoc"  ;
             $.ajax({
                 type: "GET",
                 url: url,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ value: bodyHTML.value }),
                 success: function (data) {
                     $("#txtWordCountResult").html("Inside hun");
                 },
