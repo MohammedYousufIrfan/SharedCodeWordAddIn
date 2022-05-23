@@ -177,7 +177,7 @@ function AddToc() {
             });
 
         }).then(function () {
-            if (currentOOXML != "") {
+            if (outputxml != "") {
                 context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 $("#txtCharCountResult").html(" set hogaya");
             }
