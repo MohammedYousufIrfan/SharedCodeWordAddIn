@@ -156,7 +156,7 @@ function AddToc() {
         // and return a promise to indicate task completion.
         var outputxml;
         return context.sync().then(function () {
-           // console.log("Body HTML contents: " + bodyHTML.value);
+            // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
             var data = { XmlData: bodyOOXML.value };
             $.ajax({
@@ -168,16 +168,15 @@ function AddToc() {
                 success: function (dat) {
                     outputxml = JSON.stringify(dat.XmlData);
                     $("#txtWordCountResult").html("inside");
-                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                    setOOXML_newAPI(outputxml);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
-           
-        }).then(context.sync).then(function () {
-            $("#txtCharCountResult").html("set hogaya");
-        })
+
+        });
     })
         .catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
@@ -186,6 +185,37 @@ function AddToc() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+}
+function setOOXML_newAPI(currentOOXML) {
+   
+    if (currentOOXML != "") {
+
+        // Run a batch operation against the Word object model.
+        Word.run(function (context) {
+
+            // Create a proxy object for the document body.
+            var body = context.document.body;
+
+            // Queue a commmand to insert OOXML in to the beginning of the body.
+            body.insertOoxml(currentOOXML, Word.InsertLocation.replace);
+
+            // Synchronize the document state by executing the queued commands, 
+            // and return a promise to indicate task completion.
+            return context.sync().then(function () {
+                $("#txtCharCountResult").html("set hogaya");
+            });
+        }).catch(function (error) {
+
+            $("#txtCharCountResult").html(" nai set hogaya");
+            console.log('Error: ' + JSON.stringify(error));
+            if (error instanceof OfficeExtension.Error) {
+                console.log('Debug info: ' + JSON.stringify(error.debugInfo));
+            }
+        });
+
+    } else {
+        $("#txtCharCountResult").html("null tha");
+    }
 }
 //function AddToc() {
 //    Word.run(function (context) {
