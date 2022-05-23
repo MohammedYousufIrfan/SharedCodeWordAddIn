@@ -167,15 +167,15 @@ function AddToc() {
                 dataType: "json",
                 success: function (dat) {
                     var outputxml = JSON.stringify(dat.XmlData);
-                    $("#txtWordCountResult").html(outputxml);
-                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                    $("#txtWordCountResult").html("isidesetkarre");
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
+            body.insertOoxml(outputxml, Word.InsertLocation.replace);
         }).then(context.sync).then(function () {
-            
+            $("#txtCharCountResult").html("set hogaya");
         })
     })
         .catch(function (error) {
