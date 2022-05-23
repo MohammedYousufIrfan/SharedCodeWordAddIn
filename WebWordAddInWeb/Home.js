@@ -150,10 +150,8 @@ function AddToc() {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
-
         // Queue a commmand to get the HTML contents of the body.
        var bodyOOXML = body.getOoxml();
-      
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         return context.sync().then(function () {
@@ -167,6 +165,7 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
+                    body.insertOoxml(dat, Word.InsertLocation.replace);
                     $("#txtWordCountResult").html("Inside hun");
                 },
                 error: function (dat) {
