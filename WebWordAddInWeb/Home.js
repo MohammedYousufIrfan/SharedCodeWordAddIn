@@ -154,7 +154,7 @@ function AddToc() {
        var bodyOOXML = body.getOoxml();
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        var otxml;
+        var outputxml;
         return context.sync().then(function () {
            // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
@@ -166,7 +166,7 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                    var outputxml = JSON.stringify(dat.XmlData);
+                     outputxml = JSON.stringify(dat.XmlData);
                     $("#txtWordCountResult").html("isidesetkarre");
                 },
                 error: function (dat) {
