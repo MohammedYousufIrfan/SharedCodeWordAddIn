@@ -159,6 +159,17 @@ function AddToc() {
         return context.sync().then(function () {
             $("#txtWordCountResult").html("Hi working"+bodyHTML.value);
             console.log("Body HTML contents: " + bodyHTML.value);
+            const url = "https://localhost:44324/wordanalyzer/addtoc?value=" + bodyHTML.value;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                    $("#txtWordCountResult").html("Inside hun");
+                },
+                error: function (data) {
+                    $("#txtWordCountResult").html("error occurred in ajax call.");
+                }
+            });
         });
     })
         .catch(function (error) {
