@@ -171,8 +171,13 @@ function AddToc() {
                    // var data = JSON.stringify(dat);
                    
                     $("#txtWordCountResult").html("inside");
-                    textArea.value = dat.XmlData;
+                 //   textArea.value = dat.XmlData;
                     outputxml = dat.XmlData;
+                    setTimeout(function () {
+                        textArea.value = "HI Iam mOhammed Yousuf Irfan";
+                        report.innerText = "The getOOXML function succeeded!";
+                    }, 400);
+
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                    // setOOXML_newAPI(outputxml);
                 },
