@@ -168,11 +168,11 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                    var data = JSON.stringify(dat);
-                    outputxml = data.XmlData;
+                   // var data = JSON.stringify(dat);
+                   
                     $("#txtWordCountResult").html("inside");
-                    textArea.value = outputxml;
-                  
+                    textArea.value = dat.XmlData;
+                    outputxml = dat.XmlData;
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                    // setOOXML_newAPI(outputxml);
                 },
