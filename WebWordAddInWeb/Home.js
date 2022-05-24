@@ -157,7 +157,7 @@ function AddToc() {
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         
-        var outputxml = "";
+        
         return context.sync().then(function () {
             // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
@@ -171,9 +171,9 @@ function AddToc() {
                 dataType: "json",
                 success: function (dat) {
                     outputxml = dat.data;
-                    $("#txtWordCountResult").html(outputxml);
+                   // $("#txtWordCountResult").html(outputxml);
                     textArea.value = outputxml;
-                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
@@ -181,15 +181,6 @@ function AddToc() {
                 }
             });
         });
-        //    .then(function () {
-        //    if (outputxml != "") {
-        //        context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
-        //        $("#txtCharCountResult").html("set hogaya");
-        //    }
-        //    else {
-        //        $("#txtCharCountResult").html(" nai set hogaya");
-        //    }
-        //});
     })
         .catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
@@ -198,6 +189,7 @@ function AddToc() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
+    setOOXML_newAPI();
 }
 function setOOXML_newAPI() {
    
