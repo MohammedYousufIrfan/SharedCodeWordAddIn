@@ -171,13 +171,12 @@ function AddToc() {
                 dataType: "json",
                 success: function (dat) {
                    
-                    $("#txtWordCountResult").html(dat.XmlData);
+                    $("#txtWordCountResult").html(dat.data);
                  // textArea.value = dat.XmlData;
                  // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                  // setOOXML_newAPI(outputxml);
                    // outputxml = dat.XmlData;
-                    var msg = JSON.parse(dat.XmlData);
-                    textArea.value = msg;
+                    textArea.value = dat.data;
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");

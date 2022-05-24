@@ -7,7 +7,7 @@ namespace WordAnalyzerRestApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class WordAnalyzerController : ControllerBase
+    public class WordAnalyzerController : Controller
     {
         [HttpGet("unicode")]
         public ActionResult<string> GetUnicode(string value)
@@ -39,11 +39,11 @@ namespace WordAnalyzerRestApi.Controllers
             return SharedCodeWordLibrary.WordOperations.GetWordCount(value);
         }
         [HttpPost("addtoc")]
-        public ActionResult<WordOOXML> AddToc([FromBody] WordOOXML wordOOXML)
+        public JsonResult AddToc([FromBody] WordOOXML wordOOXML)
         {
             if (wordOOXML.XmlData == null)
             {
-                return BadRequest();
+                return Json(new { data="kuchnahi"});
             }
             // string dataDir = @"C:\Users\Yousuf.Irfan\Desktop\web (2).xml";
 
@@ -57,8 +57,9 @@ namespace WordAnalyzerRestApi.Controllers
             doc.UpdateFields();
             string filepath = Path.GetTempPath() + "output2.xml";
             doc.Save(filepath);
-            wordOOXML.XmlData = System.IO.File.ReadAllText(filepath);
-            return wordOOXML;
+           // wordOOXML.XmlData = 
+                var output=System.IO.File.ReadAllText(filepath);
+              return  Json(new { data = output }); 
         }
     }
     public class WordOOXML
