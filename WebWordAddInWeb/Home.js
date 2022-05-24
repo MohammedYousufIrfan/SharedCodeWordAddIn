@@ -168,7 +168,8 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                    outputxml = JSON.stringify(dat.XmlData);
+                    var data = JSON.stringify(dat);
+                    outputxml = data.XmlData;
                     $("#txtWordCountResult").html("inside");
                     textArea.value = outputxml;
                   
