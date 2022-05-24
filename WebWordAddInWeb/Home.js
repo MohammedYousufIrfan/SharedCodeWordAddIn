@@ -70,6 +70,7 @@ const base64Image = "iVBORw0KGgoAAAANSUhEUgAAAZAAAAEFCAIAAABCdiZrAAAACXBIWXMAAAs
             $("#btnShowCharCount").click(GetCharCount);
             $("#btnShowWordCount").click(GetWordCount);
             $("#btnAddToc").click(AddToc);
+            $("#btnSetToc").click(setOOXML_newAPI);
 
             // #endregion
         });
@@ -151,7 +152,8 @@ function AddToc() {
         // Create a proxy object for the document body.
         var body = context.document.body;
         // Queue a commmand to get the HTML contents of the body.
-       var bodyOOXML = body.getOoxml();
+        var bodyOOXML = body.getOoxml();
+        var textArea = document.getElementById("dataOOXML");
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
         var outputxml;
@@ -168,6 +170,9 @@ function AddToc() {
                 success: function (dat) {
                     outputxml = JSON.stringify(dat.XmlData);
                     $("#txtWordCountResult").html("inside");
+                    setTimeout(function () {
+                        textArea.value = outputxml;
+                    }, 400);
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                    // setOOXML_newAPI(outputxml);
                 },
@@ -179,7 +184,7 @@ function AddToc() {
         }).then(function () {
             if (outputxml != "") {
                 context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                $("#txtCharCountResult").html(" set hogaya");
+                $("#txtCharCountResult").html(outputxml);
             }
             else {
                 $("#txtCharCountResult").html(" nai set hogaya");
@@ -194,8 +199,15 @@ function AddToc() {
             }
         });
 }
-function setOOXML_newAPI(currentOOXML) {
+function setOOXML_newAPI() {
    
+    // Sets the currentOOXML variable to the current contents of the task pane text area.
+    textArea = document.getElementById("dataOOXML");
+    currentOOXML = textArea.value;
+
+    // Remove all nodes from the status Div so we have a clean space to write to.
+  
+    // Check whether we have OOXML in the variable.
     if (currentOOXML != "") {
 
         // Run a batch operation against the Word object model.
@@ -210,11 +222,21 @@ function setOOXML_newAPI(currentOOXML) {
             // Synchronize the document state by executing the queued commands, 
             // and return a promise to indicate task completion.
             return context.sync().then(function () {
-                $("#txtCharCountResult").html("set hogaya");
+
+                // Tell the user we succeeded and then clear the message after a 2-second delay.
+                $("#txtWordCountResult").html("inside2");
+                setTimeout(function () {
+                  //  report.innerText = "";
+                }, 2000);
             });
         }).catch(function (error) {
 
-            $("#txtCharCountResult").html(" nai set hogaya");
+            // Clear the text area just so we don't give you the impression that there's
+            // valid OOXML waiting to be inserted... 
+            textArea.value = "";
+            // Let the user see the error.
+          
+
             console.log('Error: ' + JSON.stringify(error));
             if (error instanceof OfficeExtension.Error) {
                 console.log('Debug info: ' + JSON.stringify(error.debugInfo));
@@ -222,7 +244,7 @@ function setOOXML_newAPI(currentOOXML) {
         });
 
     } else {
-        $("#txtCharCountResult").html("null tha");
+        report.innerText = 'Add some OOXML data before trying to set the contents.';
     }
 }
 //function AddToc() {
