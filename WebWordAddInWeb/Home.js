@@ -162,7 +162,7 @@ function AddToc() {
             // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
             var data = { XmlData: bodyOOXML.value };
-           
+
             $.ajax({
                 type: "POST",
                 url: url,
@@ -172,25 +172,24 @@ function AddToc() {
                 success: function (dat) {
                     outputxml = dat.data;
                     $("#txtWordCountResult").html(outputxml);
-                
                     textArea.value = outputxml;
+                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                     textArea.value = "error hai ";
                 }
             });
-           
-
-        }).then(function () {
-            if (outputxml != "") {
-                context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                $("#txtCharCountResult").html("set hogaya");
-            }
-            else {
-                $("#txtCharCountResult").html(" nai set hogaya");
-            }
         });
+        //    .then(function () {
+        //    if (outputxml != "") {
+        //        context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
+        //        $("#txtCharCountResult").html("set hogaya");
+        //    }
+        //    else {
+        //        $("#txtCharCountResult").html(" nai set hogaya");
+        //    }
+        //});
     })
         .catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
