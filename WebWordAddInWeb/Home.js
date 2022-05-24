@@ -156,7 +156,7 @@ function AddToc() {
         var textArea = document.getElementById("dataOOXML");
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        var outputxml;
+        var outputxml = "";
         return context.sync().then(function () {
             // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
@@ -170,9 +170,8 @@ function AddToc() {
                 success: function (dat) {
                     outputxml = JSON.stringify(dat.XmlData);
                     $("#txtWordCountResult").html("inside");
-                    setTimeout(function () {
-                        textArea.value = outputxml;
-                    }, 400);
+                    textArea.value = outputxml;
+                  
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                    // setOOXML_newAPI(outputxml);
                 },
