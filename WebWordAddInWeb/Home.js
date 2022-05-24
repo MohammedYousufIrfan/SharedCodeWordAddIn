@@ -175,7 +175,7 @@ function AddToc() {
                     outputxml = dat.XmlData;
                     setTimeout(function () {
                         textArea.value = "HI Iam mOhammed Yousuf Irfan";
-                        report.innerText = "The getOOXML function succeeded!";
+                      
                     }, 400);
 
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
