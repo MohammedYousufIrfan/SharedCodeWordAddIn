@@ -182,8 +182,8 @@ function AddToc() {
                 }
             });
         }).then(function () {
-            if (outputxml != "") {
-                body.insertOoxml(outputxml, Word.InsertLocation.replace);
+            if (textArea.value != "") {
+                body.insertOoxml(textArea.value, Word.InsertLocation.replace);
                 $("#txtWordCountResult").html("aaya second then mai ");
             }
             else {
