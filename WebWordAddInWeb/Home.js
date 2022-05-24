@@ -170,13 +170,10 @@ function AddToc() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (dat) {
-                   
-                    $("#txtWordCountResult").html(dat.data);
-                 // textArea.value = dat.XmlData;
-                 // body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                 // setOOXML_newAPI(outputxml);
-                   // outputxml = dat.XmlData;
-                    textArea.value = dat.data;
+                    outputxml = dat.data;
+                    $("#txtWordCountResult").html(outputxml);
+                
+                    textArea.value = outputxml;
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
@@ -188,7 +185,7 @@ function AddToc() {
         }).then(function () {
             if (outputxml != "") {
                 context.document.body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                $("#txtCharCountResult").html(outputxml);
+                $("#txtCharCountResult").html("set hogaya");
             }
             else {
                 $("#txtCharCountResult").html(" nai set hogaya");

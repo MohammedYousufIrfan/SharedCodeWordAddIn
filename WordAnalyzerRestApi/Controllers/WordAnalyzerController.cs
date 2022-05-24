@@ -43,7 +43,7 @@ namespace WordAnalyzerRestApi.Controllers
         {
             if (wordOOXML.XmlData == null)
             {
-                return Json(new { data="kuchnahi"});
+                return Json(new { data = "kuchnahi" });
             }
             // string dataDir = @"C:\Users\Yousuf.Irfan\Desktop\web (2).xml";
 
@@ -57,9 +57,8 @@ namespace WordAnalyzerRestApi.Controllers
             doc.UpdateFields();
             string filepath = Path.GetTempPath() + "output2.xml";
             doc.Save(filepath);
-           // wordOOXML.XmlData = 
-                var output=System.IO.File.ReadAllText(filepath);
-              return  Json(new { data = output }); 
+            var output = System.IO.File.ReadAllText(filepath);
+            return Json(new { data = output });
         }
     }
     public class WordOOXML
