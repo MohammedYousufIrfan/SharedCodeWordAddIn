@@ -148,7 +148,7 @@ function GetWordCount() {
 }
 function AddToc() {
     var outputxml = "";
-    Word.run(function (context) {
+   await Word.run(function (context) {
 
         // Create a proxy object for the document body.
         var body = context.document.body;
@@ -157,39 +157,41 @@ function AddToc() {
         var textArea = document.getElementById("dataOOXML");
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
-        
-        
-        return context.sync().then(function () {
-            // console.log("Body HTML contents: " + bodyHTML.value);
-            const url = "https://localhost:44324/wordanalyzer/addtoc";
-            var data = { XmlData: bodyOOXML.value };
+       await context.sync();
+       $.ajax({
+           type: "POST",
+           url: url,
+           data: JSON.stringify(data),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (dat) {
+               outputxml = dat.data;
+               // $("#txtWordCountResult").html(outputxml);
+               textArea.value = outputxml;
+               body.insertOoxml(outputxml, Word.InsertLocation.replace);
+               await context.sync();
+               $("#txtWordCountResult").html("aaya second then mai ");
+           },
+           error: function (dat) {
+               $("#txtWordCountResult").html("error occurred in ajax call2.");
+               textArea.value = "error hai ";
+           }
+       });
+        //return context.sync().then(function () {
+        //    // console.log("Body HTML contents: " + bodyHTML.value);
+        //    const url = "https://localhost:44324/wordanalyzer/addtoc";
+        //    var data = { XmlData: bodyOOXML.value };
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (dat) {
-                    outputxml = dat.data;
-                   // $("#txtWordCountResult").html(outputxml);
-                    textArea.value = outputxml;
-                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                },
-                error: function (dat) {
-                    $("#txtWordCountResult").html("error occurred in ajax call2.");
-                    textArea.value = "error hai ";
-                }
-            });
-        }).then(function () {
-            if (textArea.value != "") {
-                body.insertOoxml(textArea.value, Word.InsertLocation.replace);
-                $("#txtWordCountResult").html("aaya second then mai ");
-            }
-            else {
-                $("#txtWordCountResult").html("error occurred in second then " + outputxml);
-            }
-        });
+           
+        //}).then(function () {
+        //    if (textArea.value != "") {
+        //        body.insertOoxml(textArea.value, Word.InsertLocation.replace);
+        //        $("#txtWordCountResult").html("aaya second then mai ");
+        //    }
+        //    else {
+        //        $("#txtWordCountResult").html("error occurred in second then " + outputxml);
+        //    }
+        //});
     })
         .catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
@@ -200,6 +202,60 @@ function AddToc() {
         });
     //setOOXML_newAPI();
 }
+//function AddToc() {
+//    var outputxml = "";
+//    Word.run(function (context) {
+
+//        // Create a proxy object for the document body.
+//        var body = context.document.body;
+//        // Queue a commmand to get the HTML contents of the body.
+//        var bodyOOXML = body.getOoxml();
+//        var textArea = document.getElementById("dataOOXML");
+//        // Synchronize the document state by executing the queued commands,
+//        // and return a promise to indicate task completion.
+        
+        
+//        return context.sync().then(function () {
+//            // console.log("Body HTML contents: " + bodyHTML.value);
+//            const url = "https://localhost:44324/wordanalyzer/addtoc";
+//            var data = { XmlData: bodyOOXML.value };
+
+//            $.ajax({
+//                type: "POST",
+//                url: url,
+//                data: JSON.stringify(data),
+//                contentType: "application/json; charset=utf-8",
+//                dataType: "json",
+//                success: function (dat) {
+//                    outputxml = dat.data;
+//                   // $("#txtWordCountResult").html(outputxml);
+//                    textArea.value = outputxml;
+//                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
+//                },
+//                error: function (dat) {
+//                    $("#txtWordCountResult").html("error occurred in ajax call2.");
+//                    textArea.value = "error hai ";
+//                }
+//            });
+//        }).then(function () {
+//            if (textArea.value != "") {
+//                body.insertOoxml(textArea.value, Word.InsertLocation.replace);
+//                $("#txtWordCountResult").html("aaya second then mai ");
+//            }
+//            else {
+//                $("#txtWordCountResult").html("error occurred in second then " + outputxml);
+//            }
+//        });
+//    })
+//        .catch(function (error) {
+//            console.log("Error: " + JSON.stringify(error));
+//            if (error instanceof OfficeExtension.Error) {
+//                $("#txtWordCountResult").html(JSON.stringify(error.debugInfo));
+//                console.log("Debug info: " + JSON.stringify(error.debugInfo));
+//            }
+//        });
+//    //setOOXML_newAPI();
+//}
 function setOOXML_newAPI() {
    
     // Sets the currentOOXML variable to the current contents of the task pane text area.
