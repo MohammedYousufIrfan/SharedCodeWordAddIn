@@ -176,7 +176,8 @@ function AddToc() {
                  // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                  // setOOXML_newAPI(outputxml);
                    // outputxml = dat.XmlData;
-                    textArea.value = dat.XmlData;
+                    var msg = JSON.parse(dat);
+                    textArea.value = msg.xmlData;
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
