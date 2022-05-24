@@ -156,6 +156,7 @@ function AddToc() {
         var textArea = document.getElementById("dataOOXML");
         // Synchronize the document state by executing the queued commands,
         // and return a promise to indicate task completion.
+        var obj;
         var outputxml = "";
         return context.sync().then(function () {
             // console.log("Body HTML contents: " + bodyHTML.value);
@@ -169,15 +170,10 @@ function AddToc() {
                 dataType: "json",
                 success: function (dat) {
                    // var data = JSON.stringify(dat);
-                   
+                    obj = JSON.parse(dat);
                     $("#txtWordCountResult").html("inside");
                  //   textArea.value = dat.XmlData;
-                    outputxml = dat.XmlData;
-                    setTimeout(function () {
-                        textArea.value = "HI Iam mOhammed Yousuf Irfan";
-                      
-                    }, 400);
-
+                   
                    // body.insertOoxml(outputxml, Word.InsertLocation.replace);
                    // setOOXML_newAPI(outputxml);
                 },
@@ -185,6 +181,11 @@ function AddToc() {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
+            outputxml = obj.XmlData;
+            setTimeout(function () {
+                textArea.value = obj.XmlData;
+
+            }, 400);
 
         }).then(function () {
             if (outputxml != "") {
