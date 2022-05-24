@@ -181,16 +181,15 @@ function AddToc() {
                     textArea.value = "error hai ";
                 }
             });
-        }).then(context.sync);
-        //    .then(function () {
-        //    if (textArea.value != "") {
-        //        body.insertOoxml(textArea.value, Word.InsertLocation.replace);
-        //        $("#txtWordCountResult").html("aaya second then mai ");
-        //    }
-        //    else {
-        //        $("#txtWordCountResult").html("error occurred in second then " + outputxml);
-        //    }
-        //});
+        }).then(context.sync).then(function () {
+            //if (outputxml != "") {
+            //    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+            //    $("#txtWordCountResult").html("aaya second then mai ");
+            //}
+            //else {
+            //    $("#txtWordCountResult").html("error occurred in second then " + outputxml);
+            //}
+        });
     }).catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
             if (error instanceof OfficeExtension.Error) {
