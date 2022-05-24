@@ -147,6 +147,7 @@ function GetWordCount() {
     });
 }
 function AddToc() {
+    var outputxml = "";
     Word.run(function (context) {
 
         // Create a proxy object for the document body.
@@ -180,6 +181,14 @@ function AddToc() {
                     textArea.value = "error hai ";
                 }
             });
+        }).then(function () {
+            if (outputxml != "") {
+                body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                $("#txtWordCountResult").html("aaya second then mai ");
+            }
+            else {
+                $("#txtWordCountResult").html("error occurred in second then ");
+            }
         });
     })
         .catch(function (error) {
@@ -189,7 +198,7 @@ function AddToc() {
                 console.log("Debug info: " + JSON.stringify(error.debugInfo));
             }
         });
-    setOOXML_newAPI();
+    //setOOXML_newAPI();
 }
 function setOOXML_newAPI() {
    
