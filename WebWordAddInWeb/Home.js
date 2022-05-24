@@ -187,7 +187,7 @@ function AddToc() {
                 $("#txtWordCountResult").html("aaya second then mai ");
             }
             else {
-                $("#txtWordCountResult").html("error occurred in second then ");
+                $("#txtWordCountResult").html("error occurred in second then " + outputxml);
             }
         });
     })
