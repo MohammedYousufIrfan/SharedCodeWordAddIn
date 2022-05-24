@@ -162,6 +162,7 @@ function AddToc() {
             // console.log("Body HTML contents: " + bodyHTML.value);
             const url = "https://localhost:44324/wordanalyzer/addtoc";
             var data = { XmlData: bodyOOXML.value };
+            textArea.value = bodyOOXML.value;
             $.ajax({
                 type: "POST",
                 url: url,
@@ -171,21 +172,21 @@ function AddToc() {
                 success: function (dat) {
                    // var data = JSON.stringify(dat);
                     obj = JSON.parse(dat);
-                    $("#txtWordCountResult").html("inside");
-                 //   textArea.value = dat.XmlData;
-                   
-                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
-                   // setOOXML_newAPI(outputxml);
+                    $("#txtWordCountResult").html(obj.XmlData);
+                 // textArea.value = dat.XmlData;
+                 // body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                 // setOOXML_newAPI(outputxml);
+                    outputxml = obj.XmlData;
+                    setTimeout(function () {
+                     //   textArea.value = obj.XmlData;
+
+                    }, 400);
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
                 }
             });
-            outputxml = obj.XmlData;
-            setTimeout(function () {
-                textArea.value = obj.XmlData;
-
-            }, 400);
+           
 
         }).then(function () {
             if (outputxml != "") {
