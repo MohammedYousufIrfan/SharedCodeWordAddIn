@@ -497,7 +497,7 @@ function Bullet_New1() {
             let list = paragraphs.items[1].startNewList();
 
             // insert the list at the start location
-             list.insertParagraph("Dummy Para", Word.InsertLocation.start)
+             list.insertParagraph("Dummy Para1", Word.InsertLocation.start)
         }).then(context.sync).then(function () {
             secondParagraph.font.set({
                 name: "Courier New",
