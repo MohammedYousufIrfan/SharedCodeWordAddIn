@@ -27,7 +27,7 @@
     <RootNamespace>VSTOWordAddIn</RootNamespace>
     <AssemblyName>VSTOWordAddIn</AssemblyName>
     <LoadBehavior>3</LoadBehavior>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <DefineConstants>VSTO40</DefineConstants>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>HomeSite</BootstrapperComponentsLocation>
