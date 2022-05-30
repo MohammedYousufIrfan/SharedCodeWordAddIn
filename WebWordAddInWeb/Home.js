@@ -174,7 +174,7 @@ function AddToc() {
                     outputxml = dat.data;
                     // $("#txtWordCountResult").html(outputxml);
                     textArea.value = outputxml;
-                    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                   
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
@@ -182,13 +182,14 @@ function AddToc() {
                 }
             });
         }).then(context.sync).then(function () {
-            //if (outputxml != "") {
-            //    body.insertOoxml(outputxml, Word.InsertLocation.replace);
-            //    $("#txtWordCountResult").html("aaya second then mai ");
-            //}
-            //else {
-            //    $("#txtWordCountResult").html("error occurred in second then " + outputxml);
-            //}
+           // body.insertOoxml(outputxml, Word.InsertLocation.replace);
+            if (outputxml != "") {
+                body.insertOoxml(outputxml, Word.InsertLocation.replace);
+                $("#txtWordCountResult").html("aaya second then mai ");
+            }
+            else {
+                $("#txtWordCountResult").html("error occurred in second then " + outputxml);
+            }
         });
     }).catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
@@ -534,7 +535,7 @@ function Bullet_New1() {
             let list = paragraphs.items[1].startNewList();
 
             // insert the list at the start location
-             list.insertParagraph("My 0 item at start1", Word.InsertLocation.start)
+             list.insertParagraph("Dummy Para", Word.InsertLocation.start)
         }).then(context.sync).then(function () {
             secondParagraph.font.set({
                 name: "Courier New",
@@ -556,7 +557,7 @@ function Bullet_New() {
 
     Word.run(function (context) {
         context.document.body.insertParagraph(
-            "Mohammed3 Office has several versions, including Office 2016, Microsoft 365 subscription, and Office on the web.",
+            "Dummy Para",
             "Start"
         );
         let paragraphs = context.document.body.paragraphs;
@@ -564,7 +565,7 @@ function Bullet_New() {
         return context.sync().then(function () {
             let list = paragraphs.items[1].startNewList();
             // insert the list at the start location
-            list.insertParagraph("My 0 item at start3", Word.InsertLocation.start);
+            list.insertParagraph("Dummy Para1", Word.InsertLocation.start);
 
         })
         //return context.sync();
