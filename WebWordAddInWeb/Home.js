@@ -170,11 +170,16 @@ function AddToc() {
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
+                async:false,
                 success: function (dat) {
                     outputxml = dat.data;
                     // $("#txtWordCountResult").html(outputxml);
                     textArea.value = outputxml;
+<<<<<<< HEAD
                    
+=======
+                    setOOXML_newAPI(outputxml);
+>>>>>>> 9d947a75a1724697c65fa6b4e6817b5ac7d82918
                 },
                 error: function (dat) {
                     $("#txtWordCountResult").html("error occurred in ajax call2.");
@@ -183,6 +188,7 @@ function AddToc() {
             });
         }).then(context.sync).then(function () {
            // body.insertOoxml(outputxml, Word.InsertLocation.replace);
+<<<<<<< HEAD
             if (outputxml != "") {
                 body.insertOoxml(outputxml, Word.InsertLocation.replace);
                 $("#txtWordCountResult").html("aaya second then mai ");
@@ -190,6 +196,15 @@ function AddToc() {
             else {
                 $("#txtWordCountResult").html("error occurred in second then " + outputxml);
             }
+=======
+            //if (outputxml != "") {
+            //    body.insertOoxml(outputxml, Word.InsertLocation.replace);
+            //    $("#txtWordCountResult").html("aaya second then mai ");
+            //}
+            //else {
+            //    $("#txtWordCountResult").html("error occurred in second then " + outputxml);
+            //}
+>>>>>>> 9d947a75a1724697c65fa6b4e6817b5ac7d82918
         });
     }).catch(function (error) {
             console.log("Error: " + JSON.stringify(error));
@@ -200,65 +215,12 @@ function AddToc() {
         });
     //setOOXML_newAPI();
 }
-//function AddToc() {
-//    var outputxml = "";
-//    Word.run(function (context) {
 
-//        // Create a proxy object for the document body.
-//        var body = context.document.body;
-//        // Queue a commmand to get the HTML contents of the body.
-//        var bodyOOXML = body.getOoxml();
-//        var textArea = document.getElementById("dataOOXML");
-//        // Synchronize the document state by executing the queued commands,
-//        // and return a promise to indicate task completion.
-        
-        
-//        return context.sync().then(function () {
-//            // console.log("Body HTML contents: " + bodyHTML.value);
-//            const url = "https://localhost:44324/wordanalyzer/addtoc";
-//            var data = { XmlData: bodyOOXML.value };
-
-//            $.ajax({
-//                type: "POST",
-//                url: url,
-//                data: JSON.stringify(data),
-//                contentType: "application/json; charset=utf-8",
-//                dataType: "json",
-//                success: function (dat) {
-//                    outputxml = dat.data;
-//                   // $("#txtWordCountResult").html(outputxml);
-//                    textArea.value = outputxml;
-//                   // body.insertOoxml(outputxml, Word.InsertLocation.replace);
-//                },
-//                error: function (dat) {
-//                    $("#txtWordCountResult").html("error occurred in ajax call2.");
-//                    textArea.value = "error hai ";
-//                }
-//            });
-//        }).then(function () {
-//            if (textArea.value != "") {
-//                body.insertOoxml(textArea.value, Word.InsertLocation.replace);
-//                $("#txtWordCountResult").html("aaya second then mai ");
-//            }
-//            else {
-//                $("#txtWordCountResult").html("error occurred in second then " + outputxml);
-//            }
-//        });
-//    })
-//        .catch(function (error) {
-//            console.log("Error: " + JSON.stringify(error));
-//            if (error instanceof OfficeExtension.Error) {
-//                $("#txtWordCountResult").html(JSON.stringify(error.debugInfo));
-//                console.log("Debug info: " + JSON.stringify(error.debugInfo));
-//            }
-//        });
-//    //setOOXML_newAPI();
-//}
-function setOOXML_newAPI() {
+function setOOXML_newAPI(currentOOXML) {
    
     // Sets the currentOOXML variable to the current contents of the task pane text area.
-    textArea = document.getElementById("dataOOXML");
-    currentOOXML = textArea.value;
+    //textArea = document.getElementById("dataOOXML");
+    //currentOOXML = textArea.value;
 
     // Remove all nodes from the status Div so we have a clean space to write to.
   

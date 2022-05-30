@@ -37,7 +37,11 @@
   </Hosts>
   <DefaultSettings>
 	  
+<<<<<<< HEAD
     <SourceLocation DefaultValue="~remoteAppUrl/Home.html" />
+=======
+    <SourceLocation DefaultValue="~remoteAppUrl/home.html" />
+>>>>>>> 9d947a75a1724697c65fa6b4e6817b5ac7d82918
     <!--<SourceLocation DefaultValue="https://mohammedyousufirfan.github.io/SharedCodeWordAddIn/WebWordAddInWeb/Home.html" />-->
   </DefaultSettings>
   <!-- End TaskPane Mode integration.  -->
